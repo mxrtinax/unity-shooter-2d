@@ -6,7 +6,7 @@ public class BackgroundScript : MonoBehaviour
 {
 
     Vector3 wantedPosition;
-    public float movement_resistance = 1f;
+    public float movement_resistance = 0f;
 
     // Start is called before the first frame update
     void Start()
