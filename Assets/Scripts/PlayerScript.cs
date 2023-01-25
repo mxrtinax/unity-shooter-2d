@@ -20,6 +20,28 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //map borders
+        if (transform.position.y >= 46)
+        {
+            transform.position = new Vector3(transform.position.x, 46, 0);
+        }
+
+        if (transform.position.y <= -44)
+        {
+            transform.position = new Vector3(transform.position.x, -44, 0);
+        }
+
+        if (transform.position.x >= 45)
+        {
+            transform.position = new Vector3(45, transform.position.y, 0);
+        }
+
+        if (transform.position.x <= -37)
+        {
+            transform.position = new Vector3(-37, transform.position.y, 0);
+        }
+        //map borders
+
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
