@@ -31,5 +31,6 @@ public class EnemyFollow : MonoBehaviour
         Vector2 direction = targetPosition - currentPosition;
         direction.Normalize();
         rb.MovePosition(rb.position + movementSpeed * Time.deltaTime * direction);
+        transform.up = direction;
     }
 }
