@@ -9,19 +9,27 @@ public class EnemyFollow : MonoBehaviour
 
     private float movementSpeed;
     private Transform target;
-    private Vector3 targetPosition;
-    private Vector3 currentPosition;
+    private Vector2 targetPosition;
+    private Vector2 currentPosition;
+
+    private Rigidbody2D rb;
+    
     
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+
         movementSpeed = enemyObject.speed;
         target = enemyObject.target;
-        targetPosition = target.position;
-        currentPosition = transform.position;
     }
 
     void Update()
     {
-        transform.position = Vector2.MoveTowards(currentPosition, targetPosition, movementSpeed * Time.deltaTime);
+        targetPosition = (Vector2)target.position;
+        currentPosition = rb.position;
+
+        Vector2 direction = targetPosition - currentPosition;
+        direction.Normalize();
+        rb.MovePosition(rb.position + movementSpeed * Time.deltaTime * direction);
     }
 }

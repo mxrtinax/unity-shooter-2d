@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingScript : MonoBehaviour
+public class EnemyShooting : MonoBehaviour
 {
-    public Vector2 direction;
+    [SerializeField]
+    private Enemy enemyObject;
+
+    private Vector2 direction;
     public GameObject projectilePrefab;
-    public float projectileSpeed = 10f;
-    public float shootInterval = 1f;
+    private float projectileSpeed = 10f;
+    private float shootInterval;
 
     private float timeSinceLastShot = 0f;
     void Start()
     {
-
+        shootInterval = enemyObject.attackSpeed;
     }
 
     void Update()
