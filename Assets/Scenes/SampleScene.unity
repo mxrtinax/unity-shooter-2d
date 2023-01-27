@@ -939,15 +939,9 @@ MonoBehaviour:
   cam: {fileID: 519420031}
   firePoint: {fileID: 1843012760}
   bulletPrefab: {fileID: 100000, guid: bfe0ba4acc768a5448d46a6c63d8106a, type: 3}
-  deathEffect: {fileID: 100002, guid: cafecd3fc3b761c45bb1553f35cf5c96, type: 3}
   bulletSpeed: 20
-<<<<<<< HEAD
   health: 100
   healthBar: {fileID: 427177437}
-=======
-  maxHealth: 100
-  currentHealth: 0
->>>>>>> 2f6810f215802a23cf66c8f5ba81b0bd40206bb6
 --- !u!1 &870995427
 GameObject:
   m_ObjectHideFlags: 0

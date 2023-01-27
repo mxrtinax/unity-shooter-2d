@@ -17,21 +17,17 @@ public class PlayerScript : MonoBehaviour
     public GameObject deathEffect;
 
     public float bulletSpeed = 20f;
-    public float health = 100f;
 
     public HealthBarBehaviour healthBar;
 
-    void Start()
-    {
-        healthBar.SetHealth(health, 100f);
-    }
 
     public int maxHealth = 100;
     public int currentHealth;
 
     void Start()
     {
-        currentHealth = maxHealth;    
+        currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth,maxHealth);
     }
 
     // Update is called once per frame
@@ -80,6 +76,16 @@ public class PlayerScript : MonoBehaviour
             AddHealth(20);
             Debug.Log(currentHealth);
         }
+        if (Input.GetKeyDown(KeyCode.G)) //de test, vedem daca scada sau creste viata cand se apasa g/h
+        {
+            currentHealth -= 5;
+
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            currentHealth += 5;
+
+        }
     }
 
     void FixedUpdate()
@@ -97,8 +103,6 @@ public class PlayerScript : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         bulletRb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
-        health -= 5;
-        healthBar.SetHealth(health, 100f);
     }
 
     void TakeDamage(int damage)
