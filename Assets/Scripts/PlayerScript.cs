@@ -60,9 +60,12 @@ public class PlayerScript : MonoBehaviour
 
         mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetButtonDown("Fire1"))
+        if (!PauseMenu.isPaused)
         {
-            Shoot();
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Shoot();
+            }
         }
 
         // testing health system
