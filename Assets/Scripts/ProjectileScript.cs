@@ -22,6 +22,4 @@ public class ProjectileScript : MonoBehaviour
         Destroy(effect, 5f);
         Destroy(gameObject);
     }
-
-    
 }
