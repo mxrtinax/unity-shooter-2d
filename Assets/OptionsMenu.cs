@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using TMPro;
+using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
     public TMP_Dropdown dropdown;
+    public GameObject toggle;
 
     void Start() 
     {
@@ -38,4 +40,16 @@ public class OptionsMenu : MonoBehaviour
                 break;
         }
     }
-}
+
+    public void SetFullscreen(bool isFullscreen) 
+    {
+        Screen.fullScreen = isFullscreen;
+        if (isFullscreen == true)
+        {
+            toggle.GetComponent<Toggle>().GetComponentInChildren<Text> ().text = "Fullscreen";
+        }
+        else {
+            toggle.GetComponent<Toggle>().GetComponentInChildren<Text> ().text = "Windowed";
+        }
+    }
+}   
