@@ -17,6 +17,14 @@ public class PlayerScript : MonoBehaviour
     public GameObject deathEffect;
 
     public float bulletSpeed = 20f;
+    public float health = 100f;
+
+    public HealthBarBehaviour healthBar;
+
+    void Start()
+    {
+        healthBar.SetHealth(health, 100f);
+    }
 
     public int maxHealth = 100;
     public int currentHealth;
@@ -89,6 +97,8 @@ public class PlayerScript : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         bulletRb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
+        health -= 5;
+        healthBar.SetHealth(health, 100f);
     }
 
     void TakeDamage(int damage)
