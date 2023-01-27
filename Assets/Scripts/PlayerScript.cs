@@ -14,8 +14,20 @@ public class PlayerScript : MonoBehaviour
 
     public Transform firePoint;
     public GameObject bulletPrefab;
+    public GameObject deathEffect;
 
     public float bulletSpeed = 20f;
+
+    public HealthBarBehaviour healthBar;
+
+    public int maxHealth = 100;
+    public int currentHealth;
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth, maxHealth);
+    }
 
     // Update is called once per frame
     void Update()
@@ -51,6 +63,18 @@ public class PlayerScript : MonoBehaviour
         {
             Shoot();
         }
+
+        // testing health system
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            TakeDamage(20);
+            Debug.Log(currentHealth);
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            AddHealth(20);
+            Debug.Log(currentHealth);
+        }
     }
 
     void FixedUpdate()
@@ -68,5 +92,19 @@ public class PlayerScript : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         bulletRb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
+    }
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+        }
+    }
+
+    void AddHealth(int healthAmount)
+    {
+        currentHealth = Mathf.Min(100, currentHealth + healthAmount);
     }
 }
