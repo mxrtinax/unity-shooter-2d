@@ -9,7 +9,7 @@ public class HealthPowerUpScript : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Destroy(gameObject);
-            collision.GetComponent<PlayerScript>().currentHealth = 100;
+            collision.GetComponent<PlayerScript>().currentHealth = collision.GetComponent<PlayerScript>().maxHealth;
             Debug.Log(collision.GetComponent<PlayerScript>().currentHealth);
         }
     }

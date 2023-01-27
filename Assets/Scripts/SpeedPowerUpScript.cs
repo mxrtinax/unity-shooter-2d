@@ -5,31 +5,23 @@ using UnityEngine;
 public class SpeedPowerUpScript : MonoBehaviour
 {
     public GameObject player;
-/*    void Start()
-    {
-        player = (GameObject)Resources.Load("Assets/Prefabs/Player.prefab", typeof(GameObject));
-    }*/
+    public float increaseAmount = 2.5f;
+    public int duration = 3;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerScript>().moveSpeed = 7.5f;
+            collision.GetComponent<PlayerScript>().moveSpeed += increaseAmount;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            StartCoroutine(speedIncreaseTime());
+            StartCoroutine(speedIncreaseTime(collision));
         }
     }
 
-    IEnumerator speedIncreaseTime()
+    IEnumerator speedIncreaseTime(Collider2D player)
     {
-        //player.GetComponent<PlayerScript>().moveSpeed = 7.5f;
-        yield return new WaitForSeconds(3);
-        revertSpeed();
+        yield return new WaitForSeconds(duration);
+        player.GetComponent<PlayerScript>().moveSpeed -= increaseAmount;
         Destroy(gameObject);
-    }
-
-    void revertSpeed()
-    {
-        player.GetComponent<PlayerScript>().moveSpeed = 5f;
     }
 }
