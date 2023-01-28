@@ -19,7 +19,7 @@ public class EnemyShooting : MonoBehaviour
 
     private float timeSinceLastShot = 0f;
 
-    public float audioDelay = 0f;
+    public float shootDelay = 0f;
     private AudioSource audioSource;
     void Start()
     {
@@ -35,8 +35,9 @@ public class EnemyShooting : MonoBehaviour
         {
             if (timeSinceLastShot >= shootInterval)
             {
-                audioSource.PlayDelayed(audioDelay);
-                Shoot();
+                audioSource.Play();
+                // wait for shootDelay miliseconds before shooting
+                Invoke("Shoot", shootDelay / 1000);
                 timeSinceLastShot = 0f;
             }
             else

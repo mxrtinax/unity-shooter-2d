@@ -415,6 +415,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 293324047}
     - target: {fileID: 944336238784799583, guid: acaa0c8ea99ec03418773a59f76e049c, type: 3}
+      propertyPath: shootDelay
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 944336238784799583, guid: acaa0c8ea99ec03418773a59f76e049c, type: 3}
       propertyPath: enemyObject
       value: 
       objectReference: {fileID: 518014008}
