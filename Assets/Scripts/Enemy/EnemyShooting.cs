@@ -18,8 +18,12 @@ public class EnemyShooting : MonoBehaviour
     private float shootInterval;
 
     private float timeSinceLastShot = 0f;
+
+    public float audioDelay = 0f;
+    private AudioSource audioSource;
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         projectileSpeed = enemyObject.projectileSpeed;
         shootInterval = enemyObject.attackSpeed;
         attackRange = enemyObject.attackRange;
@@ -31,6 +35,7 @@ public class EnemyShooting : MonoBehaviour
         {
             if (timeSinceLastShot >= shootInterval)
             {
+                audioSource.PlayDelayed(audioDelay);
                 Shoot();
                 timeSinceLastShot = 0f;
             }

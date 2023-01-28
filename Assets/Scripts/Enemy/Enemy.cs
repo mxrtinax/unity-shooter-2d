@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
     public int maxHealth = 100;
     private int currentHealth;
 
-    public int damage = 10;
     public float speed = 1f;
 
     public GameObject deathEffect;
@@ -20,7 +19,7 @@ public class Enemy : MonoBehaviour
     public int score = 10;
     
     public Transform target;
-    
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -34,14 +33,15 @@ public class Enemy : MonoBehaviour
             Die();
         }
     }
-
-    void TakeDamage(int damage)
+    
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
     }
 
-    void Die()
+    private void Die()
     {
+        GameManagerScript.AddScore(score);
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
         Destroy(gameObject);
