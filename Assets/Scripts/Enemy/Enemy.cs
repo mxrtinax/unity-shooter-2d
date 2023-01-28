@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        healthBar.setMaxHealth(maxHealth);
         healthBar.SetHealth(currentHealth);
     }
 
@@ -37,6 +38,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
     }
 
     private void Die()
@@ -45,6 +47,6 @@ public class Enemy : MonoBehaviour
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
         Destroy(gameObject);
-        EnemySpawning.numberOfEnemies--;
+        EnemySpawning.OnEnemyKilled();
     }
 }

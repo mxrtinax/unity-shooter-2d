@@ -6,13 +6,16 @@ public class EnemySpawning : MonoBehaviour
 {
     public GameObject[] enemyPrefabs;
     
-    public int timeBetweenSpawns = 5;
-    
-    public int maxEnemies = 20;
+    public int secBetweenSpawns = 5;
 
+    private int maxEnemiesWave = 5;
+    public int maxEnemyNumber = 20;
+    
     [HideInInspector]
     public static int numberOfEnemies;
-    
+    private static int numberOfWaveEnemiesKilled = 0;
+
+
     private float timeSinceLastSpawn = 0f;
     
     void Start()
@@ -22,7 +25,7 @@ public class EnemySpawning : MonoBehaviour
 
     void Update()
     {
-        if (timeSinceLastSpawn >= timeBetweenSpawns)
+        if (timeSinceLastSpawn >= secBetweenSpawns)
         {
             SpawnEnemy();
             timeSinceLastSpawn = 0f;
@@ -31,11 +34,18 @@ public class EnemySpawning : MonoBehaviour
         {
             timeSinceLastSpawn += Time.deltaTime;
         }
+
+        if (numberOfWaveEnemiesKilled >= maxEnemiesWave)
+        {
+            maxEnemiesWave = GameManagerScript.IncrementWave();
+            numberOfWaveEnemiesKilled = 0;
+        }
+
     }
     
     void SpawnEnemy()
     {
-        if (numberOfEnemies < maxEnemies)
+        if (numberOfEnemies < Mathf.Min(maxEnemyNumber, maxEnemiesWave))
         {
             int randomIndex = Random.Range(0, enemyPrefabs.Length);
             Enemy enemy = enemyPrefabs[randomIndex].GetComponent<Enemy>();
@@ -46,5 +56,11 @@ public class EnemySpawning : MonoBehaviour
                 numberOfEnemies++;
             }
         }
+    }
+
+    public static void OnEnemyKilled()
+    {
+        numberOfWaveEnemiesKilled++;
+        numberOfEnemies--;
     }
 }

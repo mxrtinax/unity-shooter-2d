@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManagerScript : MonoBehaviour
 {
     public static int score = 0;
+    public static int wave = 1;
     public GameObject gameOverUI;
 
     // Start is called before the first frame update
@@ -39,6 +40,12 @@ public class GameManagerScript : MonoBehaviour
 
     public static void AddScore(int newScoreValue)
     {
-        score += newScoreValue;
+        score += newScoreValue * wave;
+    }
+
+    public static int IncrementWave()
+    {
+        wave++;
+        return wave * 5;
     }
 }
