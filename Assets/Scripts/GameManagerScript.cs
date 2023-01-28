@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
+    public static int score = 0;
     public GameObject gameOverUI;
 
     // Start is called before the first frame update
@@ -32,5 +33,10 @@ public class GameManagerScript : MonoBehaviour
     public void goToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public static void AddScore(int newScoreValue)
+    {
+        score += newScoreValue;
     }
 }
