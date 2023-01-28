@@ -23,6 +23,8 @@ public class PlayerScript : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
 
+    private bool isDead;
+    public GameManagerScript gameManager;
     void Start()
     {
         currentHealth = maxHealth;
@@ -32,6 +34,15 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(isDead);
+        if(currentHealth <=0 && !isDead)
+        {
+            Debug.Log("s-a terminat smecheria");
+            isDead = true;
+            gameManager.gameOver();
+
+        }
+
         //map borders
         if (transform.position.y >= 46)
         {
