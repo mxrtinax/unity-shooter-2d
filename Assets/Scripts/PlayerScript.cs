@@ -18,7 +18,7 @@ public class PlayerScript : MonoBehaviour
 
     public float bulletSpeed = 20f;
 
-    public HealthBarBehaviour healthBar;
+    public HealthbarScript healthbar;
 
     public int maxHealth = 100;
     public int currentHealth;
@@ -28,7 +28,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        healthBar.SetHealth(currentHealth, maxHealth);
+        healthbar.setMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -83,6 +83,7 @@ public class PlayerScript : MonoBehaviour
         {
             TakeDamage(20);
             Debug.Log(currentHealth);
+            Debug.Log(maxHealth);
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
@@ -111,6 +112,7 @@ public class PlayerScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        healthbar.SetHealth(currentHealth);
         if (currentHealth <= 0)
         {
             GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
@@ -120,5 +122,6 @@ public class PlayerScript : MonoBehaviour
     void AddHealth(int healthAmount)
     {
         currentHealth = Mathf.Min(100, currentHealth + healthAmount);
+        healthbar.SetHealth(currentHealth);
     }
 }
