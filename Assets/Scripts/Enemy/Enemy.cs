@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     public float speed = 1f;
 
     public GameObject deathEffect;
-    public HealthBarBehaviour healthBar;
+    public HealthbarScript healthBar;
     
     public float attackSpeed = 1f;
     public float attackRange = 1f;
@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        healthBar.SetHealth(currentHealth, maxHealth);
+        healthBar.SetHealth(currentHealth);
     }
 
     void Update()

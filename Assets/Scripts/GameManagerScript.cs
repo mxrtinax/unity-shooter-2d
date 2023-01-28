@@ -22,11 +22,13 @@ public class GameManagerScript : MonoBehaviour
 
     public void gameOver()
     {
+        Time.timeScale = 0f;
         gameOverUI.SetActive(true);
     }
 
     public void playAgain()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
