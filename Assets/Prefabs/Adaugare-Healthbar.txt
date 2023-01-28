@@ -1,0 +1,3 @@
+Utilizare healthbar
+-se trage prefabul healthbar in Player/Enemy
+-in Player>PlayerScript>Healthbar se trage obiectul Healthbar(din interiorul canvasului HealthBar)
