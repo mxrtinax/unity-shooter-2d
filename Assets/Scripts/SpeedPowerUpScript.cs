@@ -14,6 +14,7 @@ public class SpeedPowerUpScript : MonoBehaviour
         {
             collision.GetComponent<PlayerScript>().moveSpeed += increaseAmount;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.GetComponent<Collider2D>().enabled = false;
             StartCoroutine(speedIncreaseTime(collision));
         }
     }
