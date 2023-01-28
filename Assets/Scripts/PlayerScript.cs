@@ -74,7 +74,12 @@ public class PlayerScript : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1"))
             {
+                SoundManagerScript.PlaySound("fire1");
                 Shoot();
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                SecondaryAttack();
             }
         }
 
@@ -107,6 +112,11 @@ public class PlayerScript : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         bulletRb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
+    }
+
+    void SecondaryAttack()
+    {
+
     }
 
     public void TakeDamage(int damage)
