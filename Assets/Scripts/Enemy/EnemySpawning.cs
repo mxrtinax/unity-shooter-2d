@@ -9,8 +9,10 @@ public class EnemySpawning : MonoBehaviour
     public int timeBetweenSpawns = 5;
     
     public int maxEnemies = 20;
-    private int numberOfEnemies;
 
+    [HideInInspector]
+    public static int numberOfEnemies;
+    
     private float timeSinceLastSpawn = 0f;
     
     void Start()
@@ -36,8 +38,13 @@ public class EnemySpawning : MonoBehaviour
         if (numberOfEnemies < maxEnemies)
         {
             int randomIndex = Random.Range(0, enemyPrefabs.Length);
-            Instantiate(enemyPrefabs[randomIndex], new Vector3(Random.Range(-35, 43), Random.Range(-41, 43), 0), Quaternion.identity);
-            numberOfEnemies++;
+            Enemy enemy = enemyPrefabs[randomIndex].GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.target = GameObject.Find("Player").transform;
+                Instantiate(enemy, new Vector3(Random.Range(-35, 43), Random.Range(-41, 43), 0), Quaternion.identity);
+                numberOfEnemies++;
+            }
         }
     }
 }
