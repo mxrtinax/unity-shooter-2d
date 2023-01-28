@@ -4,23 +4,46 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int health = 100;
+    public int maxHealth = 100;
+    private int currentHealth;
+
     public int damage = 10;
     public float speed = 1f;
+
+    public GameObject deathEffect;
+    public HealthBarBehaviour healthBar;
+    
     public float attackSpeed = 1f;
     public float attackRange = 1f;
-    public float attackCooldown = 1f;
+    public float projectileSpeed = 1f;
+
+    public int score = 10;
+    
     public Transform target;
     
     void Start()
     {
-        
+        currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth, maxHealth);
     }
 
     void Update()
     {
-        
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
-    
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+    }
+
+    void Die()
+    {
+        GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 5f);
+        Destroy(gameObject);
+    }
 }

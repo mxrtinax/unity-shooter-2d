@@ -7,35 +7,56 @@ public class EnemyShooting : MonoBehaviour
     [SerializeField]
     private Enemy enemyObject;
 
-    private Vector2 direction;
+    public Transform firePoint;
     public GameObject projectilePrefab;
-    private float projectileSpeed = 10f;
+
+    private Vector2 selfPosition;
+    private Vector2 targetPosition;
+    
+    private float projectileSpeed;
+    private float attackRange;
     private float shootInterval;
 
     private float timeSinceLastShot = 0f;
     void Start()
     {
+        projectileSpeed = enemyObject.projectileSpeed;
         shootInterval = enemyObject.attackSpeed;
+        attackRange = enemyObject.attackRange;
     }
 
     void Update()
     {
-        if (timeSinceLastShot > shootInterval)
+        if (Vector2.Distance(selfPosition, targetPosition) <= attackRange)
         {
-            timeSinceLastShot = 0f;
-            Shoot();
+            if (timeSinceLastShot >= shootInterval)
+            {
+                Shoot();
+                timeSinceLastShot = 0f;
+            }
+            else
+            {
+                timeSinceLastShot += Time.deltaTime;
+            }
         }
-        else
-        {
-            timeSinceLastShot += Time.deltaTime;
-        }
+    }
+
+    private void FixedUpdate()
+    {
+        UpdatePositions();
     }
 
     void Shoot()
     {
+        Vector2 direction = targetPosition - selfPosition;
         direction.Normalize();
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
-        projectile.AddComponent<ProjectileScript>();
+    }
+
+    void UpdatePositions()
+    {
+        selfPosition = transform.position;
+        targetPosition = enemyObject.target.position;
     }
 }
