@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
 {
+    public int damage;
     public GameObject hitEffect;
 
     void Start()
     {
-        StartCoroutine(SelfDestruct());
+        StartCoroutine(SelfDestruct());   
     }
     IEnumerator SelfDestruct()
     {
@@ -18,6 +19,16 @@ public class ProjectileScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Collider2D collider = collision.collider;
+        if (collider.CompareTag("Enemy"))
+        {
+            collider.GetComponent<Enemy>().TakeDamage(damage);
+        }
+        else if (collider.CompareTag("Player"))
+        {
+            collider.GetComponent<PlayerScript>().TakeDamage(damage);
+        }
+        
         GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
         Destroy(gameObject);

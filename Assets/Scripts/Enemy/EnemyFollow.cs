@@ -8,6 +8,7 @@ public class EnemyFollow : MonoBehaviour
     private Enemy enemyObject;
 
     private float movementSpeed;
+    
     private Transform target;
     private Vector2 targetPosition;
     private Vector2 currentPosition;
