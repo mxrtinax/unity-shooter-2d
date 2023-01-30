@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using System;
 
 public class HighscoreTable : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class HighscoreTable : MonoBehaviour
     private Transform entryTemplate;
     private List<HighscoreEntry> highscoreEntryList;
     private List<Transform> highscoreEntryTransformList;
+
 
     private void Awake() {
         entryContainer = transform.Find("HighscoreEntryContainer");
@@ -88,7 +90,7 @@ public class HighscoreTable : MonoBehaviour
         transformList.Add(entryTransform);
     }
 
-    private void AddHighscoreEntry(int score, string name) {
+    public static void AddHighscoreEntry(int score, string name) {
         // Create HighscoreEntry
         HighscoreEntry highscoreEntry = new HighscoreEntry { score = score, name = name };
 
@@ -160,4 +162,34 @@ public class HighscoreTable : MonoBehaviour
 
 
     }
+
+    public static bool CheckIfHighscore(int newScore) { 
+        string jsonString = PlayerPrefs.GetString("highscoreTable");
+        Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
+
+        int minI = -1;
+        int minValue = Int32.MaxValue;
+
+        for (int i = 0; i < highscores.highscoreEntryList.Count; i++) {
+            if (highscores.highscoreEntryList[i].score < minValue) {
+                minValue = highscores.highscoreEntryList[i].score;
+                minI = i;
+            }
+        }
+
+        string json = JsonUtility.ToJson(highscores);
+        PlayerPrefs.SetString("highscoreTable", json);
+        PlayerPrefs.Save();
+
+        if (newScore > highscores.highscoreEntryList[minI].score) {
+            highscores.highscoreEntryList.RemoveAt(minI);
+
+            return true;
+        }
+
+        return false;
+
+        Debug.Log(highscores.highscoreEntryList[minI].score.ToString());
+    }
+
 }

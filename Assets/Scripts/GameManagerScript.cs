@@ -10,8 +10,11 @@ public class GameManagerScript : MonoBehaviour
     
     private static int score = 0;
     private static int wave = 1;
+    public string user;
     public GameObject gameOverUI;
-    
+    private Transform entryContainer;
+    private Transform entryTemplate;
+
     void Start()
     {
         int score = 0;
@@ -27,10 +30,44 @@ public class GameManagerScript : MonoBehaviour
     public void gameOver()
     {
         Time.timeScale = 0f;
-        
-        Transform gameOverScore = gameOverUI.transform.Find("GameOverScore");
-        gameOverScore.GetComponent<TMP_Text>().text = "Crypto wallet: " + score + " cryptodan";
+
+        string jsonString = PlayerPrefs.GetString("highscoreTable");
+        Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
+
+        //Transform gameOverScore = gameOverUI.transform.Find("GameOverScore");
         gameOverUI.SetActive(true);
+
+        bool isHighscore = HighscoreTable.CheckIfHighscore(score);
+        if (isHighscore) {
+            gameOverUI.transform.Find("GameOverText").GetComponent<TMP_Text>().text = "YOU'RE HIRED \n (HIGHSCORE)";
+            gameOverUI.transform.Find("GameOverScore").GetComponent<TMP_Text>().text = "Take your salary: " + score + " cryptodan";
+        }
+        else {
+            gameOverUI.transform.Find("GameOverScore").GetComponent<TMP_Text>().text = "Crypto wallet: " + score + " cryptodan";
+        }
+
+        
+
+    }
+
+    private class Highscores
+    {
+        public List<HighscoreEntry> highscoreEntryList;
+    }
+
+    /*
+     * represents a single highscore entry
+     * */
+    [System.Serializable]
+    private class HighscoreEntry
+    {
+        public int score;
+        public string name;
+    }
+
+    public void ReadUserName(string userName) {
+        user = userName;
+        HighscoreTable.AddHighscoreEntry(score, user);
     }
 
     public void playAgain()
