@@ -63,4 +63,10 @@ public class EnemySpawning : MonoBehaviour
         numberOfWaveEnemiesKilled++;
         numberOfEnemies--;
     }
+
+    public static void ResetSpawning()
+    {
+        numberOfEnemies = 0;
+        numberOfWaveEnemiesKilled = 0;
+    }
 }

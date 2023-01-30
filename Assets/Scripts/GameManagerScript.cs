@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManagerScript : MonoBehaviour
 {
-    public static int score = 0;
-    public static int wave = 1;
+    
+    private static int score = 0;
+    private static int wave = 1;
     public GameObject gameOverUI;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         int score = 0;
@@ -17,8 +19,6 @@ public class GameManagerScript : MonoBehaviour
     }
 
     
-
-    // Update is called once per frame
     void Update()
     {
 
@@ -27,6 +27,9 @@ public class GameManagerScript : MonoBehaviour
     public void gameOver()
     {
         Time.timeScale = 0f;
+        
+        Transform gameOverScore = gameOverUI.transform.Find("GameOverScore");
+        gameOverScore.GetComponent<TMP_Text>().text = "Crypto wallet: " + score + " cryptodan";
         gameOverUI.SetActive(true);
     }
 
@@ -57,8 +60,18 @@ public class GameManagerScript : MonoBehaviour
         return score;
     }
 
+    public static void SetScore(int newScore)
+    {
+        score = newScore;
+    }
+
     public static int GetWave()
     {
         return wave;
+    }
+
+    public static void SetWave(int newWave)
+    {
+        wave = newWave;
     }
 }

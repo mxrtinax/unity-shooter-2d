@@ -10,6 +10,7 @@ public class HealthPowerUpScript : MonoBehaviour
         {
             Destroy(gameObject);
             collision.GetComponent<PlayerScript>().currentHealth = collision.GetComponent<PlayerScript>().maxHealth;
+            collision.GetComponent<PlayerScript>().healthbar.SetHealth(collision.GetComponent<PlayerScript>().currentHealth);
             Debug.Log(collision.GetComponent<PlayerScript>().currentHealth);
         }
     }
