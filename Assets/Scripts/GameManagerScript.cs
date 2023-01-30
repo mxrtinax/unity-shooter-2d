@@ -12,8 +12,11 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        int score = 0;
+        int wave = 1;
     }
+
+    
 
     // Update is called once per frame
     void Update()
@@ -47,5 +50,15 @@ public class GameManagerScript : MonoBehaviour
     {
         wave++;
         return wave * 5;
+    }
+
+    public static int GetScore() 
+    {
+        return score;
+    }
+
+    public static int GetWave()
+    {
+        return wave;
     }
 }
