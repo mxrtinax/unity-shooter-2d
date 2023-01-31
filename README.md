@@ -84,3 +84,5 @@ Următoarele obiective nu au mai fost implementate deoarece nu ar fi adus o îmb
 - **Ca Jucător pot vedea ce PowerUp am disponibil la un moment dat**
 
 </details>
+
+### [Link pentru descărcarea arhivei jocului](https://mega.nz/file/yYRABb4J#N5v4_wctcDljcRgiyJqRdQVRFahrb6azrh2j8xacL_Q)
