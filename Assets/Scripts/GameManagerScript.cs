@@ -10,10 +10,12 @@ public class GameManagerScript : MonoBehaviour
     
     private static int score = 0;
     private static int wave = 1;
-    public string user;
+    public string user = "proba";
     public GameObject gameOverUI;
     private Transform entryContainer;
     private Transform entryTemplate;
+    public bool isHighscore;
+    public bool alreadyPressedEnter;
 
     void Start()
     {
@@ -31,23 +33,23 @@ public class GameManagerScript : MonoBehaviour
     {
         Time.timeScale = 0f;
 
-        string jsonString = PlayerPrefs.GetString("highscoreTable");
-        Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
+        /*string jsonString = PlayerPrefs.GetString("highscoreTable");
+        Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);*/
 
         //Transform gameOverScore = gameOverUI.transform.Find("GameOverScore");
         gameOverUI.SetActive(true);
-
-        bool isHighscore = HighscoreTable.CheckIfHighscore(score);
-        if (isHighscore) {
+        isHighscore = HighscoreTable.CheckIfHighscore(score);
+        alreadyPressedEnter = true;
+        if (isHighscore)
+        {
             gameOverUI.transform.Find("GameOverText").GetComponent<TMP_Text>().text = "YOU'RE HIRED \n (HIGHSCORE)";
             gameOverUI.transform.Find("GameOverScore").GetComponent<TMP_Text>().text = "Take your salary: " + score + " cryptodan";
         }
-        else {
+        else
+        {
+            Debug.Log(score);
             gameOverUI.transform.Find("GameOverScore").GetComponent<TMP_Text>().text = "Crypto wallet: " + score + " cryptodan";
         }
-
-        
-
     }
 
     private class Highscores
@@ -65,9 +67,15 @@ public class GameManagerScript : MonoBehaviour
         public string name;
     }
 
-    public void ReadUserName(string userName) {
+    public void ReadUserName(string userName) 
+    {
         user = userName;
-        HighscoreTable.AddHighscoreEntry(score, user);
+        //isHighscore = HighscoreTable.CheckIfHighscore(score);
+        if (isHighscore && alreadyPressedEnter == true)
+        {
+            alreadyPressedEnter = false;
+            HighscoreTable.AddHighscoreEntry(score, user);
+        }
     }
 
     public void playAgain()

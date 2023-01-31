@@ -163,27 +163,28 @@ public class HighscoreTable : MonoBehaviour
 
     }
 
-    public static bool CheckIfHighscore(int newScore) { 
+    public static bool CheckIfHighscore(int newScore) 
+    { 
         string jsonString = PlayerPrefs.GetString("highscoreTable");
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
 
         int minI = -1;
         int minValue = Int32.MaxValue;
 
-        for (int i = 0; i < highscores.highscoreEntryList.Count; i++) {
+        for (int i = 0; i < highscores.highscoreEntryList.Count; i++) 
+        {
             if (highscores.highscoreEntryList[i].score < minValue) {
                 minValue = highscores.highscoreEntryList[i].score;
                 minI = i;
             }
         }
 
-        string json = JsonUtility.ToJson(highscores);
-        PlayerPrefs.SetString("highscoreTable", json);
-        PlayerPrefs.Save();
-
-        if (newScore > highscores.highscoreEntryList[minI].score) {
+        if (newScore > highscores.highscoreEntryList[minI].score) 
+        {
             highscores.highscoreEntryList.RemoveAt(minI);
-
+            string json = JsonUtility.ToJson(highscores);
+            PlayerPrefs.SetString("highscoreTable", json);
+            PlayerPrefs.Save();
             return true;
         }
 
