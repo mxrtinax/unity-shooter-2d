@@ -7,7 +7,9 @@
 ### Sprint 1 - Planning
 
 </summary>
-test
+
+![sprint_1](https://i.imgur.com/EBN7gvH.png)
+
 </details>
 
 <details>
@@ -16,5 +18,7 @@ test
 ### Sprint 2 - Programming
 
 </summary>
-test
+
+![sprint_2](https://i.imgur.com/7ScELtU.png)
+
 </details>
