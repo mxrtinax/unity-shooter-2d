@@ -85,4 +85,5 @@ Următoarele obiective nu au mai fost implementate deoarece nu ar fi adus o îmb
 
 </details>
 
-### [Link pentru descărcarea arhivei jocului](https://mega.nz/file/yYRABb4J#N5v4_wctcDljcRgiyJqRdQVRFahrb6azrh2j8xacL_Q)
+### [Download link](https://mega.nz/file/yYRABb4J#N5v4_wctcDljcRgiyJqRdQVRFahrb6azrh2j8xacL_Q)
+### [Demo video](https://youtu.be/bkvrdHfKnG4)
