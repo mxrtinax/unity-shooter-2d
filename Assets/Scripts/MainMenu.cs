@@ -5,9 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public OptionsMenu options;
+
     public void Awake()
     {
         Cursor.visible = true;
+    }
+
+    public void Start()
+    {
+        options.SetVolume(0.01f);
     }
 
     public void PlayGame() 
